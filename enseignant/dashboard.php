@@ -5,45 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
+    <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/dashboard.css">
 </head>
 
 <body>
-    <header class="header">
-        <div class="logo-container">
-            <img src="../img/qodex-logo.png" alt="">
-        </div>
-        <div class="links-container">
-            <div class="links-cont">
-                <img src="../img/dashboard-logo.png" alt="">
-                <a href="">Dashbord</a>
-            </div>
-            <div class="links-cont">
-                <img src="../img/categories-logo.png" alt="">
-                <a href="">Categories</a>
-            </div>
-            <div class="links-cont">
-                <img src="../img/myquiz-logo.png" alt="">
-                <a href="">My Quiz</a>
-            </div>
-            <div class="links-cont">
-                <img src="../img/results-logo.png" alt="">
-                <a href="">Results</a>
-            </div>
-        </div>
-        <div class="switch-container">
-            <div class="switch-container-logo">
-                <p>MK</p>
-            </div>
-            <div>
-                <p>mohamed bouth</p>
-                <p>teacher</p>
-            </div>
-            <div class="switch-button-list">
-                <img src="../img/switch-button-logo.png" alt="">
-            </div>
-        </div>
-    </header>
+    <?php include "../includes/header.php"; ?>
     <main>
         <section class="hero-section">
             <div class="left-hero-section">
@@ -103,7 +70,7 @@
             </div>
         </section>
     </main>
+    <?php include "../includes/footer.php"; ?>
     <script src="../js/dashboard.js"></script>
 </body>
-
 </html>
