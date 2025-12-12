@@ -98,3 +98,19 @@
 .statistique-title {
     font-size: 20px;
 }
+
+@media (max-width: 1124px){
+    .statistique-section{
+        padding: 20px 0 20px 0;
+        grid-template-columns: repeat(2 , 1fr);
+    }
+    
+}
+
+@media (max-width: 540px){
+    .statistique-section{
+        padding: 20px 0 20px 0;
+        grid-template-columns: repeat(1 , 1fr);
+    }
+    
+}

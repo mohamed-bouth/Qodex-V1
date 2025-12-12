@@ -145,3 +145,22 @@ body {
 .right-hero-section {
     margin-left: auto;
 }
+
+@media (max-width: 867px){
+    .hero-section {
+        padding-top: 50px !important;
+        flex-direction: column;
+        margin: 0;
+        
+    }
+    .right-hero-section {
+        margin: 0;
+        margin-left: auto;
+    }
+
+    .left-hero-section {
+        margin: 0;
+        margin-right: auto;
+    }
+}
+
