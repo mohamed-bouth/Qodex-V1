@@ -14,10 +14,10 @@
                 <h1>Category Management</h1>
                 <h3>Organize your quizzes by category</h3>
                 <div class="btn-container">
-                    <a href="" class="left-btn">
+                    <button id="openBtn" class="left-btn">
                         <img src="../img/files-logo-btn.png" alt="">
                         <p>New Categories</p>
-                    </a>
+                    </button>
                 </div>
             </div>
             <div class="right-hero-section">
@@ -48,6 +48,8 @@
             </div>
         </div>
     </section>
+    <?php include "../enseignant/add_categories.php"; ?>
     <?php include "../includes/footer.php"; ?>
+    <script src="../js/show_categories_modal.js"></script>
 </body>
 </html>

@@ -17,11 +17,11 @@
                 <h1>Teacher Dashboard</h1>
                 <h3>Manage your quizzes and track your students performance</h3>
                 <div class="btn-container">
-                    <a href="" class="left-btn">
+                    <a href="../enseignant/manage_categories.php" class="left-btn">
                         <img src="../img/files-logo-btn.png" alt="">
                         <p>New Categories</p>
                     </a>
-                    <a href="" class="right-btn">
+                    <a href="../enseignant/manage_quizzes.php" class="right-btn">
                         <img src="../img/list-logo-btn.png" alt="">
                         <p>Create a Quiz</p>
                     </a>
