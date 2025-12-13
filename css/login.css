@@ -1,0 +1,112 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    --primary-color: #0088FF;
+}
+
+body {
+    background: #0088ff;
+    background: -webkit-linear-gradient(115deg, #0088ff 0%, #979797 100%);
+    background: linear-gradient(115deg, #0088ff 0%, #979797 100%);
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+}
+
+.login-container {
+    margin: auto 0 auto 0;
+    width: 700px;
+    height: 500px;
+    background-color: white;
+    box-shadow: 0 0 30px 5px;
+    border-radius: 20px;
+    display: flex;
+}
+
+.login-container-left {
+    flex: 1;
+    margin: 10px 0px 10px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.login-container-right {
+    flex: 1;
+    margin: 10px 10px 10px;
+    border-radius: 15px;
+}
+
+.logo-img-container {
+    width: 100px;
+    height: 40px;
+}
+
+.logo-img-container img {
+    width: 100%;
+    height: 100%;
+}
+
+.login-container-content {
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.login-container-content p {
+    color: darkgray;
+}
+
+.login-container-content input {
+    width: 240px;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid darkgray;
+}
+
+.login-container-btn {
+    width: 240px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.login-btn {
+    width: 115px;
+    height: 25px;
+    border: none;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+
+.sign-btn {
+    width: 115px;
+    height: 25px;
+    border: 1px solid var(--primary-color);
+    background-color: white;
+    color: var(--primary-color);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+
+.input-container {
+    width: 240px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.input-container a{
+    text-align: end;
+    text-decoration: none;
+    color: rgb(63, 63, 63);
+    font-size: small;
+}
