@@ -1,3 +1,9 @@
+<?php
+session_start();
+$user_name = $_SESSION['user_name'];
+$user_email = $_SESSION['email'];
+$user_role = $_SESSION["user_role"];
+?>
 <head>
     <link rel="stylesheet" href="../css/global.css">
 </head>
@@ -25,11 +31,15 @@
         </div>
         <div class="switch-container">
             <div class="switch-container-logo">
-                <p>MK</p>
+                <?php
+                echo('<p>' . strtoupper($user_name[0]) . '<p>');
+                ?>
             </div>
             <div>
-                <p>mohamed bouth</p>
-                <p>teacher</p>
+                <?php
+                echo('<p>' . $user_name .'</p>');
+                echo('<p>' . $user_role .'</p>');
+                ?>
             </div>
             <div class="switch-button-list">
                 <img src="../img/switch-button-logo.png" alt="">
