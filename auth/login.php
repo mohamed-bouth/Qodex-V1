@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +11,7 @@
 </head>
 <body>
     <section class="login-container">
-        <div class="login-container-left">
+        <form class="login-container-left" method="POST" action="./try_login.php">
             <div class="logo-img-container">
                 <img src="../img/qodex-logo.png" alt="">
             </div>
@@ -16,20 +19,36 @@
                 <h1>Welcome Back</h1>
                 <p>Welcome back to your quiz Platform</p>
                 <div class="input-container">
-                    <input type="text">
-                    <input type="text">
+                    <label class="label"></label>
+                    <input class="emailInput" type="email" name="email" placeholder="Email" required>
+                    <input class="passwordInput" type="password" name="password" placeholder="Password" required>
                     <a href="">forggeten password</a>
                 </div>
                 <div class="login-container-btn">
-                    <a href="../enseignant/dashboard.php" class="login-btn">Login</a>
+                    <button type="submit" name="login" class="login-btn">Login</button>
                     <a href="./register.php" class="sign-btn">Sign up</a>
                 </div>
             </div>
             <div class="logo-img-container"></div>
-        </div>
+        </form>
         <div class="login-container-right">
             <img src="../img/lock-img-login-page.png" alt="">
         </div>
     </section>
+    <?php
+        if (isset($_SESSION['signin_error'])) { ?>
+            <script>  
+                            const emailInput = document.querySelector(".emailInput")
+                            const passwordInput = document.querySelector(".passwordInput")
+                            const label = document.querySelector(".label")
+                            emailInput.style.border = "1px solid red"
+                            passwordInput.style.border = "1px solid red"
+                            label.textContent = "check your email and password"
+                            label.style.color = "red"
+                </script>;
+        <?php    
+        unset($_SESSION['signin_error']);
+        }
+    ?>
 </body>
 </html>
