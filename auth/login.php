@@ -49,6 +49,11 @@ session_start();
         <?php    
         unset($_SESSION['signin_error']);
         }
+        unset($_SESSION['username']);
+        unset($_SESSION['email']);
+        unset($_SESSION['option']);
+        unset($_SESSION['password']);
+        unset($_SESSION['confrimePassword']);
     ?>
 </body>
 </html>
