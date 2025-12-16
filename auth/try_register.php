@@ -4,12 +4,20 @@ require_once '../config/database.php';
 
 if(isset($_POST['create'])){
     $user_name = $_POST['name'];
+    $_SESSION['username'] = $_POST['name'];
+
     $user_email = $_POST['email'];
+    $_SESSION['email'] = $_POST['email'];
+
     $user_role = $_POST['option'];
+    $_SESSION['option'] = $_POST['option'];
+
     $user_check_password = $_POST['password'];
     $user_password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-    $user_confrime_password = $_POST['confrimePassword'];
+    $_SESSION['password'] = $_POST['password'];
 
+    $user_confrime_password = $_POST['confrimePassword'];
+    $_SESSION['confrimePassword'] = $_POST['confrimePassword'];
 
     $result = $conn->query(
         "SELECT * FROM users WHERE email = '$user_email'"
@@ -29,6 +37,11 @@ if(isset($_POST['create'])){
         VALUES ('$user_name', '$user_email', '$user_password', '$user_role')";
         $conn->query($sql);
         header("location: ./login.php");
+        unset($_SESSION['username']);
+        unset($_SESSION['email']);
+        unset($_SESSION['option']);
+        unset($_SESSION['password']);
+        unset($_SESSION['confrimePassword']);
         exit();
     };
 }
