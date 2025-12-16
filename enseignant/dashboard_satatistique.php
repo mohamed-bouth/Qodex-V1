@@ -1,0 +1,30 @@
+<?php
+require_once "../config/database.php";
+
+$result = $conn->query("SELECT COUNT(*) AS total_quiz FROM quiz;");
+
+$row = $result->fetch_assoc();
+
+$num_quiz = $row['total_quiz'];
+
+$result = $conn->query("SELECT COUNT(*) AS total_category FROM category;");
+
+$row = $result->fetch_assoc();
+
+$num_category = $row['total_category'];
+
+$result = $conn->query("SELECT COUNT(*) AS total_students FROM users WHERE ROLE = 'student';");
+
+$row = $result->fetch_assoc();
+
+$num_students = $row['total_students'];
+
+$result = $conn->query("SELECT AVG(score) AS average_score FROM result");
+
+$row = $result->fetch_assoc();
+
+$avg_score = round($row['average_score'] , 2);
+?>
+
+
+

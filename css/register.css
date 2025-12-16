@@ -102,7 +102,7 @@ body {
 
 
 .input-container {
-    width: 240px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 8px;
@@ -125,4 +125,21 @@ body {
     align-items: center;
     color: var(--primary-color);
     text-decoration: none;
+}
+
+.sign-img-alert {
+    height: 35px;
+    width: 70px;
+}
+
+.alert-message-container {
+    display: flex;
+}
+
+.email-alert {
+    display: none;
+}
+
+.password-alert {
+    display: none;
 }

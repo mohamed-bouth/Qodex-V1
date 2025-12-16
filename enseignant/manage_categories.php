@@ -1,3 +1,7 @@
+<?php
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,7 +28,7 @@
                 <img src="../img/generated-image-categories.png" alt="">
             </div>
     </section>
-    <section class="categories-container-section">
+        <section class="categories-container-section">
         <div class="categories-container">
             <div class="categories-container-up">
                 <div class="categories-container-up-title">

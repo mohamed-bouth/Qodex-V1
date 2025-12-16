@@ -1,3 +1,8 @@
+<?php 
+    session_start();
+    include "../enseignant/dashboard_satatistique.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,7 +40,7 @@
             <div class="statistique-container">
                 <div class="statistique-container-paragraf-cont">
                     <p class="statistique-title">Total Quiz</p>
-                    <p class="statistique-num">24</p>
+                    <p class='statistique-num'><?= $num_quiz ?></p>
                 </div>
                 <div>
                     <img src="../img/dashboard-statistique-quiz.png" alt="">
@@ -44,7 +49,7 @@
             <div class="statistique-container">
                 <div class="statistique-container-paragraf-cont">
                     <p class="statistique-title">Categories</p>
-                    <p class="statistique-num">7</p>
+                    <p class="statistique-num"><?= $num_category ?></p>
                 </div>
                 <div>
                     <img src="../img/dashboard-statistique-categories.png" alt="">
@@ -53,7 +58,7 @@
             <div class="statistique-container">
                 <div class="statistique-container-paragraf-cont">
                     <p class="statistique-title">Active Student</p>
-                    <p class="statistique-num">57</p>
+                    <p class="statistique-num"><?= $num_students ?></p>
                 </div>
                 <div>
                     <img src="../img/dashboard-statistique-student.png" alt="">
@@ -62,7 +67,7 @@
             <div class="statistique-container">
                 <div class="statistique-container-paragraf-cont">
                     <p class="statistique-title">Average Note</p>
-                    <p class="statistique-num">24</p>
+                    <p class="statistique-num"><?= $avg_score ?></p>
                 </div>
                 <div>
                     <img src="../img/dashboard-statistique-note.png" alt="">
