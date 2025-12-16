@@ -1,5 +1,6 @@
 <?php
     session_start();
+    include "../enseignant/render_results.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,24 +31,30 @@
                 <p>Date</p>
                 <p>Staut</p>
             </div>
-            <div class="student-results">
-                <div class="student-results-name head">
-                <p>MB</p>
-                <p>Mohamed Bouth</p>
-            </div>
-            <div class="head">
-                <p>the basic of JavaScipt</p>
-            </div>
-            <div>
-                <p>18/20</p>
-            </div>
-            <div>
-                <p>04 Dec 2025</p>
-            </div>
-            <div>
-                <p class="staut">Successful</p> 
-            </div>
-        </div>
+            <?php foreach ($results as $student) { ?>
+                <div class="student-results">
+                    <div class="student-results-name head">
+                        <p><?= strtoupper($student['user_name'][0]) ?></p>
+                        <p><?= $student['user_name'] ?></p>
+                    </div>
+                    <div class="head">
+                        <p><?= $student['title'] ?></p>
+                    </div>
+                    <div>
+                        <p><?= $student['score'] ?>/20</p>
+                    </div>
+                    <div>
+                        <p><?= $student['completed_at']?></p>
+                    </div>
+                    <div>
+                        <?php if($student['score']>= 10){ ?>
+                            <p class="staut">Successful</p> 
+                        <?php }else{ ?>
+                            <p class="stautre">failure</p> 
+                        <?php } ?>
+                    </div>
+                </div>
+            <?php } ?>
         
     </section>
     <?php include "../includes/footer.php"; ?>

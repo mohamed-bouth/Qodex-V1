@@ -1,13 +1,14 @@
 <?php
 require_once "../config/database.php";
+$user_id = $_SESSION['user_id'];
 
-$result = $conn->query("SELECT COUNT(*) AS total_quiz FROM quiz;");
+$result = $conn->query("SELECT count(quiz.title) AS total_quiz FROM quiz JOIN users WHERE quiz.enseignant_id = $user_id AND users.id = $user_id;");
 
 $row = $result->fetch_assoc();
 
 $num_quiz = $row['total_quiz'];
 
-$result = $conn->query("SELECT COUNT(*) AS total_category FROM category;");
+$result = $conn->query("SELECT count(category.category_name) AS total_category FROM category JOIN users WHERE category.created_by = $user_id AND users.id = $user_id;;");
 
 $row = $result->fetch_assoc();
 
