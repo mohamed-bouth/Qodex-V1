@@ -41,8 +41,11 @@
                         <p class="des"><?= $category['category_description'] ?></p>
                     </div>
                     <div class="categories-container-up-btn">
-                        <img src="../img/edit-icon.png" alt="">
-                        <img src="../img/delete-icon.png" alt="">
+                        <button ><img src="../img/edit-icon.png" alt=""></button>
+                        <form action="./delete_categories.php" method="POST">
+                            <input type="hidden" name="category_id" value="<?= $category['id'] ?>">
+                            <button name="deleteCategory" type="submit"><img src="../img/delete-icon.png" alt=""></button>
+                        </form>
                     </div>
                 </div>
                 <div class="categories-container-down">
