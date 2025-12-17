@@ -1,29 +1,45 @@
-<head>
-    <link rel="stylesheet" href="../css/categories.css">
-</head>
-<div id="categoriesModal" class="modal">
-    <div class="modal-content">
-        <div class="modal-body">
-            <div class="modal-header">
-                <h3>New Category</h3>
-                <button id="closeBtn" class="close-btn">&times;</button>
-            </div>
-            <form>
-                <div class="form-group">
-                    <label>Category name</label>
-                    <input type="text" name="nom" required placeholder="Ex: HTML/CSS">
-                </div>
+<?php
+    session_start();
+    require_once "../config/database.php";
 
-                <div class="form-group">
-                    <label>Description</label>
-                    <textarea name="description" placeholder="Describe this category..."></textarea>
-                </div>
+    $user_id = $_SESSION['user_id'];
 
-                <div class="form-actions">
-                    <button id="cancelBtn" type="button">Annuler</button>
-                    <button id="submitBtn" type="submit">Créer</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
+    if(isset($_POST['addCategory'])){
+
+        $category_name = $_POST['name'];
+        $_SESSION['category_name'] = $_POST['name'];
+
+        $category_description = $_POST['description'];
+        $_SESSION['category_description'] = $_POST['description'];
+
+        if(empty($category_name)){
+            $_SESSION['empty_name'] = "the name is empty !";
+            $_SESSION['open_modal'] = true;
+            header('location: ./manage_categories.php');
+            exit();
+        }
+
+        if(empty($category_description)){
+            $_SESSION['empty_description'] = "the description is empty !";
+            $_SESSION['open_modal'] = true;
+            header('location: ./manage_categories.php');
+            exit();
+        }
+        $result = $conn->query("SELECT * FROM category WHERE category_name = '$category_name' AND created_by = '$user_id';");
+
+        if($result->num_rows === 1){
+            $_SESSION['empty_name'] = "The name already exists !";
+            $_SESSION['open_modal'] = true;
+            header('location: ./manage_categories.php');
+            exit();
+        }
+
+        $sql = "INSERT INTO category (category_name , category_description , created_by)
+        VALUE ('$category_name','$category_description','$user_id')";
+        $conn->query($sql);
+        header('location: ./manage_categories.php');
+        exit();
+    }
+    
+?>
+

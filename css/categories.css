@@ -76,7 +76,7 @@
     z-index: 50;
 }
 
-.modal.active{
+.active{
     display: flex !important;
 }
 

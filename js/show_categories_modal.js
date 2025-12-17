@@ -3,7 +3,7 @@ const categoriesModal = document.querySelector("#categoriesModal")
 const closeBtn = document.querySelector("#closeBtn")
 const cancelBtn = document.querySelector("#cancelBtn")
 
-flage = false
+let flage = false
 function renderCategories(){
     if(flage === false){
         categoriesModal.className = "modal active"
