@@ -6,19 +6,12 @@
                             cat.category_name,
                             cat.category_description,
 
-                            COUNT(DISTINCT q.id) AS quiz_count,
-                            COUNT(DISTINCT r.student_id) AS student_count
+                            COUNT(DISTINCT q.id) AS quiz_count
 
                             FROM category cat
 
                             LEFT JOIN quiz q 
                                 ON q.category_id = cat.id
-
-                            LEFT JOIN result r 
-                                ON r.quiz_id = q.id
-
-                            LEFT JOIN users u 
-                                ON u.id = r.student_id
 
                             WHERE cat.created_by = '$user_id'
 

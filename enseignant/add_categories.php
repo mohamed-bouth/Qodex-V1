@@ -38,6 +38,7 @@
         VALUE ('$category_name','$category_description','$user_id')";
         $conn->query($sql);
         header('location: ./manage_categories.php');
+        $_SESSION['success_edit'] = true;
         exit();
     }
     
