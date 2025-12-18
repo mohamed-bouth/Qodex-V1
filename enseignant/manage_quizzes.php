@@ -1,5 +1,6 @@
 <?php
     session_start();
+    include "./render_quiz.php"
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,14 +29,15 @@
             </div>
     </section>
     <section class="quiz-container-section">
+        <?php foreach ($results as $quiz) { ?>
             <div class="quiz-container">
                 <div class="quiz-container-up">
                     <div class="quiz-container-up-title">
                         <div>
-                            <p class="type">HTML/CSS</p>
+                            <p class="type"><?= $quiz['category_name']; ?></p>
                         </div>
-                        <p class="title">the basic of HTML5</p>
-                        <p class="des">Test your knowledge of HTML5 elements</p>
+                        <p class="title"><?= $quiz['title']; ?></p>
+                        <p class="des"><?= $quiz['description']; ?></p>
                     </div>
                     <div class="quiz-container-up-btn">
                         <img src="../img/edit-icon.png" alt="">
@@ -43,20 +45,17 @@
                     </div>
                 </div>
                 <div class="quiz-container-down">
-                    <div class="quiz-container-down-left">
-                        <img src="../img/num-quiz-icon.png" alt="">
-                        <p>12 Quiz</p>
-                    </div>
                     <div class="quiz-container-down-right">
                         <img src="../img/num-student-icon.png" alt="">
-                        <p>45 Students</p>
+                        <p><?= $quiz['student_count']; ?> Students</p>
                     </div>
                 </div>
-                <button class="see-btn">
+                <a href="./view_results.php" class="see-btn">
                     <img src="../img/see-results-icon.png" alt="">
                     <p>See the results</p>
-                </button>
+                </a>
             </div>
+        <?php } ?>
     </section>
     <?php include "../includes/footer.php"; ?>
 </body>

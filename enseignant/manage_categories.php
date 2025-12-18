@@ -4,6 +4,7 @@
     $empty_description = $_SESSION['empty_description'] ?? 'Description';
     $openModal = $_SESSION['open_modal'] ?? false;
     $openEditModal = $_SESSION['open_edit_modal'] ?? false;
+    $success_edit = $_SESSION['success_edit'] ?? false;
     include "../enseignant/render_category.php";
 ?>
 
@@ -114,7 +115,7 @@
     unset($_SESSION['category_id']);
     unset($_SESSION['name']);
     unset($_SESSION['description']);
-    if($_SESSION['success_edit']){ ?>
+    if($success_edit){ ?>
         <script>
             nameInput.value = ""
             descriptionInput.value = ""

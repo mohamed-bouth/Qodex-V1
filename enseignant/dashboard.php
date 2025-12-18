@@ -76,6 +76,5 @@
         </section>
     </main>
     <?php include "../includes/footer.php"; ?>
-    <script src="../js/dashboard.js"></script>
 </body>
 </html>
