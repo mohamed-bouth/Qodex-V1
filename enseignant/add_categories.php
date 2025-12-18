@@ -37,8 +37,8 @@
         $sql = "INSERT INTO category (category_name , category_description , created_by)
         VALUE ('$category_name','$category_description','$user_id')";
         $conn->query($sql);
-        header('location: ./manage_categories.php');
         $_SESSION['success_edit'] = true;
+        header('location: ./manage_categories.php');
         exit();
     }
     

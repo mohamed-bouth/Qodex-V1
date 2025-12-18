@@ -4,8 +4,13 @@ const CancelBtn = document.querySelector("#CancelBtn");
 const AddQuestion = document.querySelector("#AddQuestion");
 const questionsContainer = document.getElementById('questionsContainer');
 const quizForm = document.querySelector('.quiz-form');
+const numQuestion = document.querySelector("#num_question");
+const titreInput = document.querySelector("#titreInput");
+const descriptionInput = document.querySelector("#descriptionInput");
+const titreLabel = document.querySelector("#titreLabel");
+const descriptionLabel = document.querySelector("#descriptionLabel")
 
-let questionCount = 1;
+let questionCount = numQuestion.value + 1;
 
 
 function addQuestion() {
@@ -23,31 +28,31 @@ function addQuestion() {
 
             <div class="form-group">
                 <label class="form-label">Question *</label>
-                <input type="text" name="questions[${index}][question]" required class="form-input" placeholder="Posez votre question...">
+                <input type="text" name="questions[${index}][question]"  class="form-input" placeholder="Posez votre question...">
             </div>
 
             <div class="options-grid">
                 <div class="form-group">
                     <label class="form-label-sm">Option 1 *</label>
-                    <input type="text" name="questions[${index}][option1]" required class="form-input">
+                    <input type="text" name="questions[${index}][option1]"  class="form-input">
                 </div>
                 <div class="form-group">
                     <label class="form-label-sm">Option 2 *</label>
-                    <input type="text" name="questions[${index}][option2]" required class="form-input">
+                    <input type="text" name="questions[${index}][option2]"  class="form-input">
                 </div>
                 <div class="form-group">
                     <label class="form-label-sm">Option 3 *</label>
-                    <input type="text" name="questions[${index}][option3]" required class="form-input">
+                    <input type="text" name="questions[${index}][option3]"  class="form-input">
                 </div>
                 <div class="form-group">
                     <label class="form-label-sm">Option 4 *</label>
-                    <input type="text" name="questions[${index}][option4]" required class="form-input">
+                    <input type="text" name="questions[${index}][option4]"  class="form-input">
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="form-label">Réponse correcte *</label>
-                <select name="questions[${index}][correct]" required class="form-input">
+                <select name="questions[${index}][correct]"  class="form-input">
                     <option value="">Sélectionner la bonne réponse</option>
                     <option value="1">Option 1</option>
                     <option value="2">Option 2</option>
@@ -70,6 +75,12 @@ function closeModal() {
     questionCount = 0;
 
     addQuestion();
+    titreInput.value = ''
+    descriptionInput.value = ''
+    titreLabel.textContent = "Quiz title *"
+    titreLabel.style.color = "black"
+    descriptionLabel.textContent = "Description"
+    descriptionLabel.style.color = "black"
 }
 
 function openModal() {
@@ -81,7 +92,7 @@ CancelBtn.addEventListener("click", closeModal);
 AddQuestion.addEventListener("click", addQuestion);
 
 
-
+document.addEventListener("DOMContentLoaded", function() {
 questionsContainer.addEventListener("click", (e) => {
     
     if (e.target.closest('.delete-btn')) {
@@ -98,7 +109,7 @@ questionsContainer.addEventListener("click", (e) => {
 
         questionCount = questions.length;
     }
-});
+})});
 
 
 
