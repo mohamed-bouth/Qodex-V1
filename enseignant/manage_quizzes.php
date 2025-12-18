@@ -43,7 +43,10 @@
                     </div>
                     <div class="quiz-container-up-btn">
                         <img src="../img/edit-icon.png" alt="">
-                        <img src="../img/delete-icon.png" alt="">
+                        <form action="./delete_quiz.php" method="POST">
+                            <input type="hidden" name="quiz_id" value="<?= $quiz['id'] ?>">
+                            <button class="quizBtns" name="deleteQuiz" type="submit"><img src="../img/delete-icon.png" alt=""></button>
+                        </form>
                     </div>
                 </div>
                 <div class="quiz-container-down">

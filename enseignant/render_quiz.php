@@ -2,6 +2,7 @@
     include "../config/database.php";
     $user_id = $_SESSION['user_id'];
     $result = $conn->query("SELECT 
+                                quiz.id,
                                 category.category_name,
                                 quiz.title,
                                 quiz.description,
