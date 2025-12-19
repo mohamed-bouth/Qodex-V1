@@ -1,8 +1,15 @@
 <?php
     session_start();
+    if (!isset($_SESSION['user_id'])) {
+    header("Location: ../auth/login.php");
+    exit();
+    }
     include "./render_quiz.php";
     $num_quesion = $_SESSION['num_question'] ?? 0;
     $qustion_error = $_SESSION['qustion_error'] ?? false;
+    $openEditModal = $_SESSION['open_edit_modal'] ?? false;
+    $oldData = $_SESSION['old_data'] ?? '';
+    echo $_SESSION['error_message'] ?? '';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,7 +49,7 @@
                         <p class="des"><?= $quiz['description']; ?></p>
                     </div>
                     <div class="quiz-container-up-btn">
-                        <img src="../img/edit-icon.png" alt="">
+                        <button id="editBtn" data-id="<?= $quiz['id'] ?>"><img src="../img/edit-icon.png" alt=""></button>
                         <form action="./delete_quiz.php" method="POST">
                             <input type="hidden" name="quiz_id" value="<?= $quiz['id'] ?>">
                             <button class="quizBtns" name="deleteQuiz" type="submit"><img src="../img/delete-icon.png" alt=""></button>
@@ -73,11 +80,11 @@
             </div>
 
             <div class="modal-body">
-                <form class="quiz-form" action="./add_quiz.php" method="POST">
+                <form id="quizForm" class="quiz-form" action="./add_quiz.php" method="POST">
                     <div class="form-row two-columns">
                         <div class="form-group">
                             <label id="titreLabel" class="form-label" <?php if($_SESSION['title_error'] ?? false) echo "style='color: red;'"; ?> > <?= $_SESSION['title_error'] ?? 'Quiz title *' ?></label>
-                            <input id="titreInput" type="text" name="quizTitre"  class="form-input" value="<?= $_SESSION['quizTitre'] ?? '' ?>" placeholder="Ex: the basic of HTML5">
+                            <input id="titreInput" type="text" name="quizTitre"  class="form-input" value="<?= $_SESSION['quizTitre'] ?? $oldData['quizTitre'] ?? '' ?>" placeholder="Ex: the basic of HTML5">
                         </div>
 
                         <div class="form-group">
@@ -93,7 +100,7 @@
 
                     <div class="form-group">
                         <label id="descriptionLabel" class="form-label" <?php if($_SESSION['description_error'] ?? false) echo "style='color: red;'"; ?> ><?= $_SESSION['description_error'] ?? 'Description' ?></label>
-                        <input id="descriptionInput" name="quizDescription" rows="3" class="form-input" value="<?= $_SESSION['quizDescription'] ?? '' ?>" placeholder="write your quiz Description"></input>
+                        <input id="descriptionInput" name="quizDescription" rows="3" class="form-input" value="<?= $_SESSION['quizDescription'] ??  $oldData['quizDescription'] ?? '' ?>" placeholder="write your quiz Description"></input>
                     </div>
 
                     <hr class="divider">
@@ -118,25 +125,25 @@
 
                                 <div class="form-group">
                                     <label class="form-label">Question *</label>
-                                    <input type="text" name="questions[0][question]" value="<?= $_SESSION['questions_data'][0]['question'] ?? '' ?>" class="form-input" placeholder="Posez votre question...">
+                                    <input id="question" type="text" name="questions[0][question]" value="<?= $oldData['questions'][0]['question'] ?? '' ?>" class="form-input" placeholder="Posez votre question...">
                                 </div>
 
                                 <div class="options-grid">
                                     <div class="form-group">
                                         <label class="form-label-sm">Option 1 *</label>
-                                        <input type="text" name="questions[0][option1]" value="<?= $_SESSION['questions_data'][0]['option1'] ?? '' ?>" class="form-input">
+                                        <input type="text" name="questions[0][option1]" value="<?= $oldData['questions'][0]['option1'] ?? '' ?>" class="form-input option">
                                     </div>
                                     <div class="form-group">
                                         <label class="form-label-sm">Option 2 *</label>
-                                        <input type="text" name="questions[0][option2]" value="<?= $_SESSION['questions_data'][0]['option2'] ?? '' ?>" class="form-input">
+                                        <input type="text" name="questions[0][option2]" value="<?= $oldData['questions'][0]['option2'] ?? '' ?>" class="form-input option">
                                     </div>
                                     <div class="form-group">
                                         <label class="form-label-sm">Option 3 *</label>
-                                        <input type="text" name="questions[0][option3]" value="<?= $_SESSION['questions_data'][0]['option3'] ?? '' ?>" class="form-input">
+                                        <input type="text" name="questions[0][option3]" value="<?= $oldData['questions'][0]['option3'] ?? '' ?>" class="form-input option">
                                     </div>
                                     <div class="form-group">
                                         <label class="form-label-sm">Option 4 *</label>
-                                        <input type="text" name="questions[0][option4]" value="<?= $_SESSION['questions_data'][0]['option4'] ?? '' ?>" class="form-input">
+                                        <input type="text" name="questions[0][option4]" value="<?= $oldData['questions'][0]['option4'] ?? '' ?>" class="form-input option">
                                     </div>
                                 </div>
 
@@ -151,23 +158,20 @@
                                     </select>
                                 </div>
                             </div>
-                            <?php include "./add_old_question.php"; ?>
+                            <!--  -->
                         </div>
                     </div>
-                    
-                
                     <div class="modal-footer">
                         <button id="CancelBtn" type="button"  class="btn btn-secondary">Cancel</button>
                         <button name="addQuiz" id="CreateBtn" type="submit" class="btn btn-primary"> Create</button>
                     </div>
+                    <input type="hidden" name="quiz_id_form" value="<?= $_SESSION['old_quiz_id'] ?? '' ?>">
                 </form>
             </div>
         </div>
     </div>
     <?php include "../includes/footer.php"; ?>
-    <script src="../js/show_quiz_modal.js">
-
-    </script>
+    <script src="../js/show_quiz_modal.js"></script>
     <?php if($num_quesion > 0) { ?>
         <script>
             openModal()
@@ -180,7 +184,19 @@
     unset($_SESSION['questions_data']);
     unset($_SESSION['title_error']);
     unset($_SESSION['category_error']);
-    unset($_SESSION['description_error'])
+    unset($_SESSION['description_error']);
+    unset($_SESSION['old_quiz_id']);
+    ?>
+    <?php if($openEditModal){ ?>
+        <script>
+            openModal()
+            form.action = './edit_quiz.php'
+        </script>
+
+    <?php } 
+    unset($_SESSION['open_edit_modal']);
+    unset($_SESSION['old_data']);
+    unset($_SESSION['error_message']);
     ?>
 </body>
 </html>

@@ -1,5 +1,10 @@
 <?php
+    if (!isset($_SESSION['user_id'])) {
+        header("Location: ../auth/login.php");
+        exit();
+    }
     include "../config/database.php";
+
     $user_id = $_SESSION['user_id'];
     $result = $conn->query("SELECT 
                                 quiz.id,
@@ -14,10 +19,11 @@
                                 ON result.quiz_id = quiz.id
                             LEFT JOIN users 
                                 ON users.id = result.student_id
-                            WHERE quiz.enseignant_id = 4
+                            WHERE quiz.enseignant_id = $user_id
                             GROUP BY quiz.id;
                             ");
     $results = $result->fetch_all(MYSQLI_ASSOC);
 
     $option = $conn->query("SELECT * FROM category WHERE created_by = $user_id");
     $options = $option->fetch_all(MYSQLI_ASSOC);
+?>
