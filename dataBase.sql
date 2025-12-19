@@ -1,0 +1,59 @@
+CREATE DATABASE qodex;
+USE qodex;
+
+CREATE TABLE users(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	user_name VARCHAR(255) NOT NULL,
+	email VARCHAR(255) UNIQUE NOT NULL,
+	password_hash VARCHAR(255) NOT NULL,
+	role ENUM("student","teacher") NOT NULL,
+	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	deleted_at TIMESTAMP NULL DEFAULT NULL
+);
+
+CREATE TABLE category (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	category_name VARCHAR(255) NOT NULL,
+	category_description TEXT NOT NULL,
+	created_by INT NOT NULL,
+	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	updated_at TIMESTAMP NULL DEFAULT NULL,
+	FOREIGN KEY (created_by) REFERENCES users(id)
+);
+
+CREATE TABLE quiz (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	title VARCHAR(255) NOT NULL,
+    description TEXT NOT NULL,
+	category_id INT NOT NULL,
+	enseignant_id INT NOT NULL,
+	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	updated_at TIMESTAMP NULL DEFAULT NULL,
+	id_active TINYINT(1) NOT NULL,
+	FOREIGN KEY (category_id) REFERENCES category(id),
+	FOREIGN KEY (enseignant_id) REFERENCES users(id)
+);
+
+CREATE TABLE question (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	quiz_id INT NOT NULL,
+	question TEXT NOT NULL,
+	option_1 VARCHAR(255) NOT NULL,
+	option_2 VARCHAR(255) NOT NULL,
+	option_3 VARCHAR(255) NOT NULL,
+	option_4 VARCHAR(255) NOT NULL,
+	correct_option TINYINT NOT NULL,
+	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	FOREIGN KEY (quiz_id) REFERENCES quiz(id)
+);
+
+CREATE TABLE result (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	quiz_id INT NOT NULL,
+	student_id INT NOT NULL,
+	score DECIMAL(4,2) NOT NULL,
+	total_questions INT NOT NULL,
+	completed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	FOREIGN KEY (quiz_id) REFERENCES quiz(id),
+	FOREIGN KEY (student_id) REFERENCES users(id)
+);
