@@ -7,9 +7,13 @@ if (isset($_POST['login'])) {
     $email    = $_POST['email'];
     $password = $_POST['password'];
 
-    $result = $conn->query(
-        "SELECT * FROM users WHERE email = '$email'"
-    );
+    $stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
+
+    $stmt->bind_param("s", $email);
+
+    $stmt->execute();
+
+    $result = $stmt->get_result();
 
     if ($result->num_rows === 1) {
 

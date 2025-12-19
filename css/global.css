@@ -5,10 +5,11 @@
     font-family: Arial, Helvetica, sans-serif;
     --primary-color: #0088FF;
 }
+
 body {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;    
+    min-height: 100vh;
 }
 
 .header {
@@ -47,12 +48,12 @@ body {
     border-radius: 15px;
     background-color: var(--primary-color);
     margin-right: 10px;
-        display: flex;
+    display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.switch-container-logo p{
+.switch-container-logo p {
     color: white;
 }
 
@@ -67,8 +68,8 @@ body {
     justify-content: center;
     align-items: center;
     color: white;
-    margin-top: auto; 
-} 
+    margin-top: auto;
+}
 
 * {
     margin: 0;
@@ -77,10 +78,11 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     --primary-color: #0088FF;
 }
+
 body {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;    
+    min-height: 100vh;
 }
 
 .hero-section {
@@ -89,7 +91,7 @@ body {
     background-color: var(--primary-color);
     display: flex;
     align-items: center;
-    
+
 }
 
 .left-hero-section {
@@ -129,7 +131,7 @@ body {
 .right-btn {
     width: 166px;
     height: 40px;
-    background-color: rgb(0, 0, 0 , 0.1);
+    background-color: rgb(0, 0, 0, 0.1);
     border-radius: 10px;
     display: flex;
     align-items: center;
@@ -149,13 +151,14 @@ body {
     margin-left: auto;
 }
 
-@media (max-width: 867px){
+@media (max-width: 867px) {
     .hero-section {
         padding-top: 50px !important;
         flex-direction: column;
         margin: 0;
-        
+
     }
+
     .right-hero-section {
         margin: 0;
         margin-left: auto;
@@ -167,3 +170,58 @@ body {
     }
 }
 
+
+.burger-icon {
+    position: fixed;
+    top: 5px;
+    right: 50px;
+    font-size: 30px;
+    cursor: pointer;
+    z-index: 1001;
+    background: none;
+    border: none;
+    color: #333;
+}
+
+.sidebar {
+    width: 167px;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    right: -167px;
+    overflow-x: hidden;
+    transition: 0.3s;
+    padding-top: 50px;
+}
+
+.sidebar.active {
+    right: 0;
+}
+
+.sidebar a {
+    padding: 10px 53px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #ffffff;
+    display: block;
+    transition: 0.3s;
+    text-align: right;
+    border-bottom-left-radius: 15px;
+    background-color: rgb(0, 0, 0 , 0.1);
+
+}
+
+
+.sidebar a:hover {
+    color: #000000;
+    background-color: white;;
+
+}
+
+.logout-icon {
+    margin-left: 10px;
+}
+
+.mySidebar {
+    position: relative;
+}

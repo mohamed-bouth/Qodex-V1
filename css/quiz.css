@@ -344,3 +344,8 @@ textarea.form-input {
     border: none;
     background-color: white;
 }
+
+#editBtn {
+    background-color: white;
+    border: none;
+}

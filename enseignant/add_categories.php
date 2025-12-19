@@ -1,5 +1,9 @@
 <?php
     session_start();
+    if (!isset($_SESSION['user_id'])) {
+        header("Location: ../auth/login.php");
+        exit();
+    }
     require_once "../config/database.php";
 
     $user_id = $_SESSION['user_id'];
@@ -34,9 +38,11 @@
             exit();
         }
 
-        $sql = "INSERT INTO category (category_name , category_description , created_by)
-        VALUE ('$category_name','$category_description','$user_id')";
-        $conn->query($sql);
+        $stmt = $conn->prepare("INSERT INTO category (category_name, category_description, created_by) VALUES (?, ?, ?)");
+        $stmt->bind_param("ssi", $category_name, $category_description, $user_id);
+        $stmt->execute();
+        $stmt->close(); 
+
         $_SESSION['success_edit'] = true;
         header('location: ./manage_categories.php');
         exit();

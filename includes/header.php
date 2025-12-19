@@ -41,7 +41,27 @@ $user_role = $_SESSION["user_role"];
                 ?>
             </div>
             <div class="switch-button-list">
-                <img src="../img/switch-button-logo.png" alt="">
+                <button class="burger-icon" onclick="toggleMenu()">
+                        <img src="../img/switch-button-logo.png" alt="">
+                </button>
+            </div>
+            <div id="mySidebar" class="sidebar" >
+                <a href="../auth/logout.php">Log out</a>
             </div>
         </div>
     </header>
+    <script>
+        
+        function toggleMenu() {
+            var sidebar = document.getElementById("mySidebar");
+            var btn = document.querySelector(".burger-icon");
+
+            sidebar.classList.toggle("active");
+
+            if (sidebar.classList.contains("active")) {
+                btn.style.color = "#fff";
+            } else {
+                btn.style.color = "#333";
+            }
+        }
+    </script>

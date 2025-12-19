@@ -1,5 +1,9 @@
 <?php
     session_start();
+    if (!isset($_SESSION['user_id'])) {
+    header("Location: ../auth/login.php");
+    exit();
+    }
     $empty_name = $_SESSION['empty_name'] ?? 'Category name';
     $empty_description = $_SESSION['empty_description'] ?? 'Description';
     $openModal = $_SESSION['open_modal'] ?? false;
@@ -108,6 +112,7 @@
             console.log("work")
             categoryForm.action = './edit_categories.php'
             submitBtn.textContent = "Edit"
+
         </script>
     
     <?php }

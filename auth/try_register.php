@@ -19,9 +19,11 @@ if(isset($_POST['create'])){
     $user_confrime_password = $_POST['confrimePassword'];
     $_SESSION['confrimePassword'] = $_POST['confrimePassword'];
 
-    $result = $conn->query(
-        "SELECT * FROM users WHERE email = '$user_email'"
-    );
+    $stmt = $conn->prepare("SELECT * FROM users WHERE email = ? ");
+    $stmt->bind_param("s", $user_email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
     if($result->num_rows === 1){
         $_SESSION['gmail_error'] = true;
         header("location: ./register.php");
@@ -33,9 +35,12 @@ if(isset($_POST['create'])){
         exit();
     };
     if($result->num_rows === 0){
-        $sql = "INSERT INTO users (user_name, email, password_hash, role)
-        VALUES ('$user_name', '$user_email', '$user_password', '$user_role')";
-        $conn->query($sql);
+
+        $stmt = $conn->prepare("INSERT INTO users (user_name, email, password_hash, role) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("ssss", $user_name, $user_email, $user_password, $user_role);
+        $stmt->execute();
+        $stmt->close();
+
         header("location: ./login.php");
         unset($_SESSION['username']);
         unset($_SESSION['email']);
